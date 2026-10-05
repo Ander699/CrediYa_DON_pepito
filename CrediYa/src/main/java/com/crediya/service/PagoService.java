@@ -13,9 +13,9 @@ import java.util.stream.Collectors;
 
 public class PagoService {
     private final Repositorio<Pago> repo;
-    private final PrestamoService prestamos;
+    private final GestorPrestamos prestamos;
 
-    public PagoService(Repositorio<Pago> repo, PrestamoService prestamos) {
+    public PagoService(Repositorio<Pago> repo, GestorPrestamos prestamos) {
         this.repo = repo;
         this.prestamos = prestamos;
     }

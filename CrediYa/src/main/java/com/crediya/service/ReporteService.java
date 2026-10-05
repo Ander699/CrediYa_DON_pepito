@@ -10,12 +10,12 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class ReporteService {
-    private final PrestamoService prestamos;
+    private final GestorPrestamos prestamos;
     private final ClienteService clientes;
     private final EmpleadoService empleados;
     private final PagoService pagos;
 
-    public ReporteService(PrestamoService prestamos, ClienteService clientes,
+    public ReporteService(GestorPrestamos prestamos, ClienteService clientes,
                           EmpleadoService empleados, PagoService pagos) {
         this.prestamos = prestamos;
         this.clientes = clientes;

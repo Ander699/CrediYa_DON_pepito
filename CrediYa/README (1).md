@@ -133,6 +133,7 @@ CREATE TABLE pagos (
     FOREIGN KEY (prestamo_id) REFERENCES prestamos(id)
 );
 ```
+![alt text](er_crediya.png)
 
 > Si ya tienes tus tablas creadas y funcionando, no necesitas este script.
 

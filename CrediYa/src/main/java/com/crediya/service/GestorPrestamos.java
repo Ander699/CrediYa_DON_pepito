@@ -10,12 +10,12 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-public class PrestamoService {
+public class GestorPrestamos {
     private final Repositorio<Prestamo> repo;
     private final ClienteService clientes;
     private final EmpleadoService empleados;
 
-    public PrestamoService(Repositorio<Prestamo> repo, ClienteService clientes, EmpleadoService empleados) {
+    public GestorPrestamos(Repositorio<Prestamo> repo, ClienteService clientes, EmpleadoService empleados) {
         this.repo = repo;
         this.clientes = clientes;
         this.empleados = empleados;

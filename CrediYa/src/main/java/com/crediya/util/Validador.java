@@ -84,8 +84,6 @@ public final class Validador {
         else if (d.startsWith("0057")) d = d.substring(4);
         else if (d.length() == CELULAR_DIGITOS + 2 && d.startsWith("57")) d = d.substring(2);
 
-        if (!d.matches("\\d+"))
-            throw new CrediYaException("El telefono solo puede tener numeros (se permite el prefijo +57, espacios y guiones).");
         if (d.length() != CELULAR_DIGITOS)
             throw new CrediYaException("El celular debe tener exactamente " + CELULAR_DIGITOS
                     + " digitos (ingresaste " + d.length() + ").");

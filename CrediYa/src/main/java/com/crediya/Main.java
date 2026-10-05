@@ -15,7 +15,7 @@ public class Main {
     private static final Consola in = new Consola();
     private static EmpleadoService empleados;
     private static ClienteService clientes;
-    private static PrestamoService prestamos;
+    private static GestorPrestamos prestamos;
     private static PagoService pagos;
     private static ReporteService reportes;
 
@@ -26,7 +26,7 @@ public class Main {
 
         empleados = new EmpleadoService(new RepositorioDual<>(new EmpleadoArchivoRepo(), new EmpleadoJdbcRepo()));
         clientes = new ClienteService(new RepositorioDual<>(new ClienteArchivoRepo(), new ClienteJdbcRepo()));
-        prestamos = new PrestamoService(new RepositorioDual<>(new PrestamoArchivoRepo(), new PrestamoJdbcRepo()),
+        prestamos = new GestorPrestamos(new RepositorioDual<>(new PrestamoArchivoRepo(), new PrestamoJdbcRepo()),
                 clientes, empleados);
         pagos = new PagoService(new RepositorioDual<>(new PagoArchivoRepo(), new PagoJdbcRepo()), prestamos);
         reportes = new ReporteService(prestamos, clientes, empleados, pagos);
@@ -34,7 +34,7 @@ public class Main {
         int op = -1;
         while (op != 0) {
             System.out.println("\n===== CREDIYA S.A.S. =====");
-            System.out.println("1. Empleados\n2. Clientes\n3. Prestamos\n4. Pagos\n5. Reportes\n0. Salir");
+            System.out.println("1. Empleados\n2. Clientes\n3. Gestion De Prestamos\n4. Pagos\n5. Reportes\n0. Salir");
             try {
                 op = in.entero("Opcion");
                 switch (op) {
@@ -112,7 +112,7 @@ public class Main {
 
     // ---------- Prestamos ----------
     private static void menuPrestamos() {
-        System.out.println("\n-- PRESTAMOS --\n1. Crear\n2. Listar\n3. Cambiar estado");
+        System.out.println("\n-- GESTOR DE PRESTAMOS --\n1. Crear\n2. Listar\n3. Cambiar estado\n4. Mostrar Prestamos Con Estado Activo\n5. Mostrar Estado Prestamo");
         try {
             switch (in.entero("Opcion")) {
                 case 1:
@@ -123,7 +123,7 @@ public class Main {
                     double interes = in.pedirDinero("Interes total (%)", Validador::interes);
                     int cuotas = in.pedirEntero("Numero de cuotas (1 a " + Validador.CUOTAS_MAX + ")", Validador::cuotas);
                     Prestamo p = prestamos.crear(cid, eid, monto, interes, cuotas);
-                    System.out.println("Prestamo creado:\n  " + linea(p));
+                    System.out.println("Prestamo registrado correctamente:\n  " + linea(p));
                     break;
                 case 2: prestamos.listar().forEach(x -> System.out.println(linea(x))); break;
                 case 3:
@@ -137,6 +137,13 @@ public class Main {
                     prestamos.cambiarEstado(id, EstadoPrestamo.valueOf(est));
                     System.out.println("Estado actualizado.");
                     break;
+                case 4: reportes.prestamosActivos().forEach(x -> System.out.println(linea(x))); break;
+                case 5:
+                    int idp = in.pedirEntero("Id del prestamo", v -> Validador.id(v, "id del prestamo"));
+                    p = prestamos.buscarPorId(idp)
+                            .orElseThrow(() -> new CrediYaException("No existe el prestamo " + idp));
+                    System.out.println("ID " + p.getId() + " Estado " + p.getEstado());
+                        return;
                 default: System.out.println("Opcion invalida.");
             }
         } catch (CrediYaException ex) {
