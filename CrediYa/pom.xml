@@ -11,8 +11,7 @@
     <name>CrediYa</name>
 
     <properties>
-        <!-- Si tienes Java 17 o 21 puedes dejarlo en 11: compila igual. -->
-        <maven.compiler.release>11</maven.compiler.release>
+        <maven.compiler.release>25</maven.compiler.release>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <main.class>com.crediya.Main</main.class>
     </properties>
@@ -27,6 +26,11 @@
 
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.14.1</version>
+            </plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>

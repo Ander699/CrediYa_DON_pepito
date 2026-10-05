@@ -38,7 +38,7 @@ Aplicación de consola en **Java** para administrar una empresa de préstamos: e
 
 | Herramienta | Versión | Notas |
 |---|---|---|
-| JDK | 11 o superior | Probado con Java 21 |
+| JDK | 25 (LTS) | Versión objetivo del proyecto |
 | Maven | 3.x | Solo si ejecutas por terminal; los IDE ya lo incluyen |
 | MySQL | 8.x | **Opcional**; sin él el programa usa solo archivos |
 
